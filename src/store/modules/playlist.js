@@ -21,7 +21,7 @@ export default {
   },
   actions: {
     updatePlaylists ({ state, commit }, payload) {
-      if (state.playlists[payload.name]) {
+      if (state.playlists[Object.keys(payload)[0]]) {
         commit('setToast', { status: toast.error, message: 'Playlist with the same name already exists' })
       } else {
         commit('setPlaylists', payload)
