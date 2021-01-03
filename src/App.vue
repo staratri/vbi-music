@@ -58,6 +58,7 @@ a {
   position: relative;
   @include at-break($break--small) {
     padding: $spacer;
+    width: 98vw;
   }
 }
 </style>
