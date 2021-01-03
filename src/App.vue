@@ -1,32 +1,63 @@
+<script>
+import Tabs from '@/components/Tabs'
+import Toast from '@/components/Toast'
+import { mapMutations, mapState } from 'vuex'
+
+export default {
+  name: 'VIB',
+  components: {
+    Tabs,
+    Toast
+  },
+  computed: {
+    ...mapState('playlist', ['playlists', 'toast'])
+  },
+  methods: {
+    ...mapMutations('playlist', ['setPlaylists'])
+  }
+}
+</script>
+
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <transition name="fade">
+      <Toast v-if="toast.status" v-bind="toast" />
+    </transition>
+    <Tabs />
+    <router-view />
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+/**
+G
+*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
+
+* {
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+body {
+  background: linear-gradient(to right, #3a6186, #89253e);
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+#app {
+  padding: $spacer/2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  font-family: Montserrat;
+  position: relative;
+  @include at-break($break--small) {
+    padding: $spacer;
   }
 }
 </style>
